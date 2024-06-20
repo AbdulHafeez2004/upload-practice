@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Heart Disease Classification</title>
+</head>
+
+<body>
+    <div class="norm">
+        <div class="nav_wrapper">
+            <h2>CruxCreates</h2>
+            <ion-icon class="logo" name="planet"></ion-icon>
+        </div>
+
+
+        <div>
+            <div class="container">
+                <br><br>
+                <h1 class="center">Heart Disease Classification</h1>
+                <div class="res_text">
+                    <h5 class="header">This is your result.
+                        <br>
+                    </h5>
+                </div>
+
+                <div class="row">
+                    <h3>{{pred}}</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <footer>
+        <div class="copyright">
+            <div class="copy">
+                <p>&copy; 2023 AbdulHafeez Lasisi, CruxCreates.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--  Scripts-->
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            opacity: 1,
+            duration: 3000,
+            offset: true
+        });
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&family=Lexend+Deca:wght@400;700&display=swap');
+
+        body {
+            background: #111;
+            height: 100%;
+            margin: auto;
+            font-family: 'Lexend Deca', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .center {
+            margin-top: 180px;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h5 {
+            font-size: 20px;
+        }
+
+        .row {
+            margin-bottom: 30px;
+        }
+
+        .res_text {
+            margin: 45px;
+        }
+
+        .nav_wrapper {
+            background-color: white;
+            color: #111;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 30px;
+            margin-bottom: 90px;
+        }
+
+        .connect {
+            height: fit-content;
+            width: 50%;
+            background-color: white;
+            color: #36454F;
+            padding: 20px;
+            border-radius: 5%;
+        }
+
+        .copyright {
+            text-align: center;
+            margin: 30px;
+        }
+
+        h3 {
+            font-size: 50px;
+            margin-left: 10%;
+            margin-right: 10%;
+            margin-top: 16%;
+            margin-bottom: 16%;
+        }
+
+        .logo {
+            color: black;
+            font-size: 35px;
+            margin: 10px;
+        }
+    </style>
+
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Heart Disease Classification</title>
+
+    <!-- CSS  -->
+</head>
+
+<body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav_wrapper">
+            <h2>CruxCreates</h2>
+            <ion-icon class="logo" name="planet"></ion-icon>
+        </div>
+    </nav>
+
+
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br><br>
+            <div class="center" data-aos="fade-down" data-aos-duration="3000">
+                <h1 class="header">Heart Disease Classification</h1>
+                <h3>Please enter possible values to get accurate results.</h3>
+                <h5>Predict your heart condition, with the probabilities!
+                    <br>
+                </h5>
+            </div>
+
+
+            <!-- age - age in years
+sex - (1 = male; 0 = female)
+cp - chest pain type
+0: Typical angina: chest pain related decrease blood supply to the heart
+1: Atypical angina: chest pain not related to heart
+2: Non-anginal pain: typically esophageal spasms (non heart related)
+3: Asymptomatic: chest pain not showing signs of disease
+trestbps - resting blood pressure (in mm Hg on admission to the hospital)
+anything above 130-140 is typically cause for concern
+chol - serum cholestoral in mg/dl
+serum = LDL + HDL + .2 * triglycerides
+above 200 is cause for concern
+fbs - (fasting blood sugar > 120 mg/dl) (1 = true; 0 = false)
+'>126' mg/dL signals diabetes
+restecg - resting electrocardiographic results
+0: Nothing to note
+1: ST-T Wave abnormality
+can range from mild symptoms to severe problems
+signals non-normal heart beat
+2: Possible or definite left ventricular hypertrophy
+Enlarged heart's main pumping chamber
+thalach - maximum heart rate achieved
+exang - exercise induced angina (1 = yes; 0 = no)
+oldpeak - ST depression induced by exercise relative to rest
+looks at stress of heart during excercise
+unhealthy heart will stress more
+slope - the slope of the peak exercise ST segment
+0: Upsloping: better heart rate with excercise (uncommon)
+1: Flatsloping: minimal change (typical healthy heart)
+2: Downslopins: signs of unhealthy heart
+ca - number of major vessels (0-3) colored by flourosopy
+colored vessel means the doctor can see the blood passing through
+the more blood movement the better (no clots)
+thal - thalium stress result
+1,3: normal
+6: fixed defect: used to be defect but ok now
+7: reversable defect: no proper blood movement when excercising
+target - have disease or not (1=yes, 0=no) (= the predicted attribute) -->
+
+            <div class="row">
+                <form action='/predict' method="POST" class="col s12">
+                    <div class="row">
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="age"><b>Age</b></label>
+                            <br>
+                            <input id="age" name='age' type="number" class="validate" required>
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="sex"><b>Sex (1 for male, 0 for female)</b></label>
+                            <br>
+                            <input id="sex" name='sex' type="number" class="validate" required>
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="cp"><b>Chest Pain Type (0 - Typical angina, 1 - Atypical angina, 2 - Non-anginal
+                                    Pain, 3 - Asymptomatic)</b></label>
+                            <br>
+                            <input id="cp" name='cp' type="number" class="validate" required>
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="trestbps"><b>Resting Blood Pressure (mmHg)</b></label>
+                            <br>
+                            <input id="trestbps" name='trestbps' type="number" class="validate" required>
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="chol"><b>Serum Cholesterol (mg/dl)</b></label>
+                            <br>
+                            <input id="chol" name='chol' type="number" class="validate" required>
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="fbs"><b>Fasting Blood Sugar (mg/dl)</b></label>
+                            <br>
+                            <input id="fbs" name='fbs' type="number" class="validate" required>
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="restecg"><b>Resting Electrocardiographic results (0 - normalty, 1 - ST-T Wave
+                                    abnormality, 2 - Possible ventricular hypertrophy)</b></label>
+                            <br>
+                            <input id="restecg" name='restecg' type="number" class="validate" required>
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="thalach"><b>Maximum Heart Rate Achieved</b></label>
+                            <br>
+                            <input id="thalach" name='thalach' type="number" class="validate" required>
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="exang"><b>Exercise Induced Angina (1 - Yes, 0 - No)</b></label>
+                            <br>
+                            <input id="exang" name="exang" type="number" class="validate" required>
+
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="oldpeak"><b>ST depression induced by exercise relative to rest</b></label>
+                            <br>
+                            <input id="oldpeak" name="oldpeak" type="number" class="validate" required>
+
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="slope"><b>The Slope of the peak exercise ST segment (0 - Upsloping, 1 -
+                                    Flatsloping, 2 - Downsloping)</b></label>
+                            <br>
+                            <input id="slope" name="slope" type="number" class="validate" required>
+
+                        </div>
+                        <div class="input right" data-aos="fade-left" data-aos-duration="3000">
+                            <label for="ca"><b>Number of major vessels(0-3) coloured by fluoroscopy
+                                    (blood-clots)</b></label>
+                            <br>
+                            <input id="ca" name="ca" type="number" class="validate" required>
+
+                        </div>
+                        <div class="input left" data-aos="fade-right" data-aos-duration="3000">
+                            <label for="thal"><b>Thalium Stress Result</b></label>
+                            <br>
+                            <input id="thal" name="thal" type="number" class="validate" required>
+
+                        </div>
+
+                        <div class="submit_btn">
+
+                            <button type="submit">Predict</button>
+                        </div>
+                </form>
+            </div>
+
+            <!-- <br><h4 align ="center"><b>{{pred}}</b></h4><br> -->
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+
+            <!-- <ion-icon name="heart"></ion-icon> -->
+
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer_row">
+                        <div data-aos="fade-up" data-aos-duration="3000" class="bio">
+                            <ion-icon class="logo" name="planet"></ion-icon>
+                            <h5 class="white-text">Company Bio</h5>
+                            <p class="grey-text text-lighten-4">I'm Hafeez, a web developer, a machine learning engineer
+                                and an aspiring Systems and Robotics Engineer. CruxCreates, is
+                                an innovative to interact with Artificial Intelligence and bring AI to your finger tips.
+                                Definitely keep tabs on this
+                                space, as huge things are coming.</p>
+
+
+                        </div>
+                        <div data-aos="fade-up" data-aos-duration="3000" class="connect">
+                            <ion-icon class="logo" name="people"></ion-icon>
+                            <h5 class="white-text">Connect with me</h5>
+                            <ul>
+                                <li><a class="white-text" href='mailto:abdulhafeezlasisi@gmail.com'><ion-icon
+                                            name="mail" class="nav_msil"></ion-icon></a></li>
+                                <li><a class="white-text" href="https://twitter.com/theonlyCrux"><ion-icon
+                                            name="logo-twitter" class="nav_msil"></ion-icon></a></li>
+                                <li><a class="white-text"
+                                        href="https://www.linkedin.com/mwlite/in/abdulhafeez-lasisi-b1b379248"><ion-icon
+                                            name="logo-linkedin" class="nav_msil"></ion-icon></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="container">
+                        <p>&copy; 2023 AbdulHafeez Lasisi, CruxCreates.</p>
+                    </div>
+                </div>
+            </footer>
+
+
+            <!--  Scripts-->
+
+            <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+                AOS.init({
+                    once: true,
+                    opacity: 1,
+                    duration: 3000,
+                    offset: true
+                });
+            </script>
+
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter&family=Lexend+Deca:wght@400;700&display=swap');
+
+                body {
+                    background: #111;
+                    margin: auto;
+                    font-family: 'Lexend Deca', sans-serif;
+                    color: white;
+                    margin: 0;
+                    position: relative;
+                }
+
+                .container {
+                    text-align: center;
+                }
+
+                .center {
+                    margin-top: 20%;
+                }
+
+                h1 {
+                    font-size: 50px;
+                }
+
+                h5 {
+                    font-size: 20px;
+                }
+
+                .row {
+                    margin-left: 20%;
+                    margin-right: 20%;
+                    margin-bottom: 30px;
+                }
+
+                .nav_wrapper {
+                    background-color: white;
+                    color: #111;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    font-size: 30px;
+                }
+
+                .logo {
+                    font-size: 35px;
+                    margin: 10px;
+                }
+
+                .input {
+                    margin-top: 60px;
+                    margin-bottom: 60px;
+                }
+
+                input {
+                    background: #ecf0f3;
+                    padding: 10px;
+                    padding-left: 20px;
+                    height: 50px;
+                    font-size: 14px;
+                    border-radius: 50px;
+                    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+                }
+
+                .input b {
+                    font-size: 23px;
+                    margin-bottom: 7px;
+                }
+
+                .submit_btn button {
+                    font-family: 'Lexend Deca', sans-serif;
+                    height: 90px;
+                    width: 80%;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    font-size: 24px;
+                    background-color: #36454F;
+                    color: white;
+                    padding: 0;
+                    border: 0;
+                }
+
+                .submit_btn button:hover {
+                    background-color: white;
+                    color: #36454F;
+                    width: 80%;
+                    border-radius: 50px;
+                    transition: all 0.3s ease-in-out;
+                }
+
+                .footer_row {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 10%;
+                    margin-right: 10%;
+                    margin-top: 30px;
+                    margin-bottom: 80px;
+                }
+
+                .bio {
+                    height: fit-content;
+                    width: 50%;
+                    background-color: white;
+                    color: #36454F;
+                    margin-right: 23%;
+                    padding: 20px;
+                    border-radius: 5%;
+                }
+
+                ul {
+                    list-style: none;
+                }
+
+                .connect {
+                    height: fit-content;
+                    width: 50%;
+                    background-color: white;
+                    color: #36454F;
+                    padding: 20px;
+                    border-radius: 5%;
+                }
+
+                .nav_msil {
+                    text-align: center;
+                    font-size: 40px;
+                    margin: 10px;
+                    color: #36454F;
+                }
+
+                /* .nav_msil:hover{
+      color: red;
+    } */
+            </style>
+</body>
+
+</html>
